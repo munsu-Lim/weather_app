@@ -1,19 +1,37 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {Component} from 'react';
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
-export default function App() {
-  return (
+export default class App extends Component {
+  state = {
+    isLoaded: false
+  }
+  render() {
+    const { isLoaded } = this.state;
+    return (
     <View style={styles.container}>
-      <Text>Hello! I'm a Naitve Developer Now!</Text>
+      {isLoaded ? null : (
+        <View style={styles.loading}>
+          <Text style={styles.loadingText}>Getting the fucking weather</Text>
+        </View>
+      )}
     </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+  loading: {
+    flex: 1,
+    backgroundColor: "#FDF6AA",
+    justifyContent: 'flex-end',
+    paddingLeft: 25
+  },
+  loadingText: {
+    fontSize: 38,
+    marginBottom: 100
+  }
 });
